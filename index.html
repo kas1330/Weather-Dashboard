@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
+    <script src="https://kit.fontawesome.com/5c0ca3f3f9.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class= 'jumbotron p-1 mt-3 text-center ' style="background-color: darkcyan;">
@@ -13,9 +15,16 @@
 
     <div class= 'container'>
         <div class= 'row'>
-            <div class= 'col-4' style='background-color:grey;'></div>
+            <div class= 'col-4' style='background-color:azure'>
+                <h3>Search for your city:</h3>
+                <div class = 'input-group mb-4'>
+                    <input type='text' id='city-search' class='form-control' >
+                    <button id= 'search-btn' style="background-color: darkcyan;">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div> 
     </div>
-    
 </body>
 </html>
