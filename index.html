@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weather Dashboard</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css"> -->
     <script src="https://kit.fontawesome.com/5c0ca3f3f9.js" crossorigin="anonymous"></script>
@@ -31,7 +31,20 @@
             </div>
             <div class = 'col-8'>
                 <div class = 'row ml-2 border border-dark'>
-                    <div class= 'col-12'>Temperature:</div>
+                    <div class= 'col-12'>
+                        <!-- Fill this in with city name, date, and icon for weather: -->
+                        <h2 class= 'city' id= 'city-name'></h2>
+                        <p id= 'temp'>Temperature:</p>
+                        <p id= 'humid'>Humidity: </p>
+                        <p id= 'wind'>Wind Speed: </p>
+                        <p id= 'uvi'>UV Index: 
+                            <button id= "uv-index btn btn-primary" class='uv-display uv-color'>index here</button>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class= 'col-12'>
+                    <h2>5-Day Forecast</h2>
                 </div>
             </div>
         </div> 
