@@ -7,3 +7,19 @@
 //Future weather should show 5 days worth- date, icon, temp and humidity
 //When you click on a city in search history show all the info again
 //When you open the app, show the last city you searched for
+//1. Take input from box, plug it into the api query
+
+$(document).ready(function(){
+
+    
+    $("#search-btn").on("click", function (event) {
+        event.preventDefault();
+        console.log('Button clicked');
+
+        var userInput = $('#city-search').val();
+        console.log('City is: ', userInput);
+    })
+
+
+
+});
