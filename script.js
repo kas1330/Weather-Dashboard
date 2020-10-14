@@ -31,10 +31,17 @@ $(document).ready(function(){
             cityName = response.name;
             console.log('City name is: ', cityName);
             var today = new Date();
-            // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
             var date = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear();
             console.log('Date is: ', date);
-            $('#city-name').html(cityName+ ' ' + date);
+            $('#city-name').html(cityName + ' ' + '('+ date + ')' + ' ');
+
+            var icon = response.weather[0].icon;
+            console.log('icon is: ', icon);
+            imgURL = 'http://openweathermap.org/img/wn/'+ icon + '.png';
+            $('#weather-icon').attr('src', imgURL);
+
+            
+
 
 
 
