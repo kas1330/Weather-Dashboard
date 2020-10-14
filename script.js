@@ -13,14 +13,17 @@
 
 $(document).ready(function(){
 
+    var longit = 0;
+    var latit = 0;
+
     
     $("#search-btn").on("click", function (event) {
         event.preventDefault();
-        console.log('Button clicked');
+        // console.log('Button clicked');
         var apiKey = 'faa01ea92e85d4bc6a69d8f941aba85c';
 
         var userInput = $('#city-search').val();
-        console.log('City is: ', userInput);
+        // console.log('City is: ', userInput);
 
         queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&appid=' + apiKey;
         $.ajax({
@@ -28,19 +31,33 @@ $(document).ready(function(){
             method: "GET"
         }).then(function (response) {
             console.log(response);
+            
+            longit = response.coord.lon;
+            latit = response.coord.lat;
+            // console.log('coordinates are: ', longit, latit);
+
             cityName = response.name;
-            console.log('City name is: ', cityName);
             var today = new Date();
             var date = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear();
-            console.log('Date is: ', date);
+            // console.log('Date is: ', date);
             $('#city-name').html(cityName + ' ' + '('+ date + ')' + ' ');
 
             var icon = response.weather[0].icon;
-            console.log('icon is: ', icon);
+            // console.log('icon is: ', icon);
             imgURL = 'http://openweathermap.org/img/wn/'+ icon + '.png';
             $('#weather-icon').attr('src', imgURL);
 
-            
+            var tempK = response.main.feels_like;
+            var tempF = (tempK * (9/5)) - 459.67;
+            console.log('Tempf: ', tempF);
+            $('#temp').html('Temperature: '+tempF.toFixed(1) + '\u00B0' + 'F');
+
+            var humidity = response.main.humidity;
+            $('#humid').html('Humidity: '+humidity + '%');
+
+            var windS = response.wind.speed;
+            $('#wind').html('Wind-speed: '+ windS + 'mph');
+
 
 
 
