@@ -69,7 +69,7 @@ $(document).ready(function(){
             }).then(function (response) {
                 // console.log('UVI response: ', response);
                 var uvIndex = response.value;
-                console.log(uvIndex);
+                // console.log(uvIndex);
                 $('#uvi').html('UV Index: ');
                 $('#uv-ind').html(uvIndex);
                 // $(currentUvindex).html(response.value);
@@ -82,17 +82,37 @@ $(document).ready(function(){
             }).then(function (response) {
                 console.log(response);
 
+                //Start at 12 noon the next day
+                var j = 5;
                 for(var i = 0; i<5; i++){
-                    //Start at 12 noon the next day
-                    var j = 5;
-
+                    
                     //Display the next 5 dates
                     var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
                     var dateW = '#date-week' + i.toString();
                     $(dateW).html(dateFD);
 
                     //Display the next 5 weather icons
-                    var iconFD = response.weather[j].icon;
+                    var iconFD = response.list[j].weather[0].icon;
+                    var weatherFD = '#weather-pic' + i.toString();
+                    imgURLFD = 'http://openweathermap.org/img/wn/'+ iconFD + '.png';
+                    $(weatherFD).attr('src', imgURLFD);
+                  
+                    // console.log('J: ', j);
+
+                    //Display the temp
+                    var tempFDK = response.list[j].main.temp;
+                    var tempFDF = (tempFDK * (9/5)) - 459.67;
+                    var tempFD = '#future-temp' + i.toString();
+                    $(tempFD).html('Temp: ' + tempFDF.toFixed(1) + '\u00B0' + 'F');
+
+                    //Display humidity
+                    var humidityFD = response.list[j].main.humidity;
+                    console.log('humidity: ', humidityFD );
+                    var humidFD = '#future-humid' + i.toString();
+                    $(humidFD).html('Humidity: ' + humidityFD + '%');
+
+                    //Increment j to show data 24hrs from now
+                    j= j+8;
                 }
             })
 
