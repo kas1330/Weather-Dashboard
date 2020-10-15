@@ -31,7 +31,7 @@ $(document).ready(function(){
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            console.log(response);
+            // console.log(response);
             
             longit = response.coord.lon;
             latit = response.coord.lat;
@@ -67,12 +67,33 @@ $(document).ready(function(){
                 url: queryURL2,
                 method: "GET"
             }).then(function (response) {
-                console.log('UVI response: ', response);
+                // console.log('UVI response: ', response);
                 var uvIndex = response.value;
                 console.log(uvIndex);
                 $('#uvi').html('UV Index: ');
                 $('#uv-ind').html(uvIndex);
                 // $(currentUvindex).html(response.value);
+            })
+
+            var queryURL3= 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&appid=' + apiKey;
+            $.ajax({
+                url: queryURL3,
+                method: "GET"
+            }).then(function (response) {
+                console.log(response);
+
+                for(var i = 0; i<5; i++){
+                    //Start at 12 noon the next day
+                    var j = 5;
+
+                    //Display the next 5 dates
+                    var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
+                    var dateW = '#date-week' + i.toString();
+                    $(dateW).html(dateFD);
+
+                    //Display the next 5 weather icons
+                    var iconFD = response.weather[j].icon;
+                }
             })
 
         })
