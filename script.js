@@ -13,12 +13,13 @@
 
 $(document).ready(function(){
 
-    var longit = 0;
-    var latit = 0;
 
     
     $("#search-btn").on("click", function (event) {
         event.preventDefault();
+        var longit = 0;
+        var latit = 0;
+    
         // console.log('Button clicked');
         var apiKey = 'faa01ea92e85d4bc6a69d8f941aba85c';
 
@@ -49,20 +50,34 @@ $(document).ready(function(){
 
             var tempK = response.main.feels_like;
             var tempF = (tempK * (9/5)) - 459.67;
-            console.log('Tempf: ', tempF);
+            // console.log('Tempf: ', tempF);
             $('#temp').html('Temperature: '+tempF.toFixed(1) + '\u00B0' + 'F');
 
             var humidity = response.main.humidity;
             $('#humid').html('Humidity: '+humidity + '%');
 
             var windS = response.wind.speed;
-            $('#wind').html('Wind-speed: '+ windS + 'mph');
+            var windSMPH = windS * 2.236936;
+            $('#wind').html('Wind-speed: '+ windSMPH.toFixed(1) + ' mph');
 
 
-
-
+            //Call for UV Index
+            var queryURL2 = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + latit + '&lon=' + longit + '&appid=' + apiKey;
+            $.ajax({
+                url: queryURL2,
+                method: "GET"
+            }).then(function (response) {
+                console.log('UVI response: ', response);
+                var uvIndex = response.value;
+                console.log(uvIndex);
+                $('#uvi').html('UV Index: ');
+                $('#uv-ind').html(uvIndex);
+                // $(currentUvindex).html(response.value);
+            })
 
         })
+
+
     })
 
 
