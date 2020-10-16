@@ -35,27 +35,28 @@ $(document).ready(function(){
             
             longit = response.coord.lon;
             latit = response.coord.lat;
-            // console.log('coordinates are: ', longit, latit);
 
+            //Display city name
             cityName = response.name;
             var today = new Date();
             var date = (today.getMonth()+1) + '/' + today.getDate() + '/' + today.getFullYear();
-            // console.log('Date is: ', date);
             $('#city-name').html(cityName + ' ' + '('+ date + ')' + ' ');
 
+            //Display weather icon
             var icon = response.weather[0].icon;
-            // console.log('icon is: ', icon);
             imgURL = 'http://openweathermap.org/img/wn/'+ icon + '.png';
             $('#weather-icon').attr('src', imgURL);
 
+            //Display temp
             var tempK = response.main.feels_like;
             var tempF = (tempK * (9/5)) - 459.67;
-            // console.log('Tempf: ', tempF);
             $('#temp').html('Temperature: '+tempF.toFixed(1) + '\u00B0' + 'F');
 
+            //Display humidity
             var humidity = response.main.humidity;
             $('#humid').html('Humidity: '+humidity + '%');
 
+            //Display wind speed
             var windS = response.wind.speed;
             var windSMPH = windS * 2.236936;
             $('#wind').html('Wind-speed: '+ windSMPH.toFixed(1) + ' mph');
@@ -67,12 +68,26 @@ $(document).ready(function(){
                 url: queryURL2,
                 method: "GET"
             }).then(function (response) {
-                // console.log('UVI response: ', response);
                 var uvIndex = response.value;
-                // console.log(uvIndex);
                 $('#uvi').html('UV Index: ');
                 $('#uv-ind').html(uvIndex);
                 // $(currentUvindex).html(response.value);
+                if(uvIndex >= 0 && uvIndex < 3){
+                    $('#uv-ind').css("background-color", "green");
+                }
+                if(uvIndex >= 3 && uvIndex <= 6){
+                    $('#uv-ind').css("background-color", "yellow");
+                    $('#uv-ind').css('color', 'black');
+                }
+                if(uvIndex >= 6 && uvIndex <= 8){
+                    $('#uv-ind').css("background-color", "orange");
+                }
+                if(uvIndex >= 8 && uvIndex <= 11){
+                    $('#uv-ind').css("background-color", "red");
+                }
+                if(uvIndex > 11){
+                    $('#uv-ind').css("background-color", "violet");
+                }
             })
 
             var queryURL3= 'http://api.openweathermap.org/data/2.5/forecast?q=' + userInput + '&appid=' + apiKey;
@@ -97,8 +112,6 @@ $(document).ready(function(){
                     imgURLFD = 'http://openweathermap.org/img/wn/'+ iconFD + '.png';
                     $(weatherFD).attr('src', imgURLFD);
                   
-                    // console.log('J: ', j);
-
                     //Display the temp
                     var tempFDK = response.list[j].main.temp;
                     var tempFDF = (tempFDK * (9/5)) - 459.67;
