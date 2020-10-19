@@ -19,6 +19,11 @@ $(document).ready(function(){
 
         var userInput = $('#city-search').val();
         // console.log('City is: ', userInput);
+        // var $input = $('<input type="button" value="new button" />');
+        // $input.appendTo($("body"));
+        var cityInput = $('<input type= "button" id= "cityBtn" class= "mb-2 btn-primary btn-lg" value=""/>');
+        $('#buttonList').append(cityInput);
+        $('#cityBtn').attr('value', userInput);
 
         queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&appid=' + apiKey;
         $.ajax({

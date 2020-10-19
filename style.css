@@ -1,3 +1,13 @@
 .hidden{
     display:none;
 }
+
+#buttonList{
+    display:flex;
+    flex-direction: column;
+}
+
+#cityBtn{
+    background-color: darkcyan;
+    color: white;
+}
