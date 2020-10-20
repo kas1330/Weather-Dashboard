@@ -10,6 +10,8 @@ $(document).ready(function(){
     if(JSON.parse(localStorage.getItem('citiesList'))){
         var l = JSON.parse(localStorage.getItem('citiesList'));
         var listLength = l.length;
+        var prevSearch = l[listLength-1].city;
+        getWeather(prevSearch);
         var i = 0;
         l.forEach(city => {
             console.log(city);
