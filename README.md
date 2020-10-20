@@ -18,3 +18,5 @@ a clear button and working code for it, but I realized I didn't need it so I com
 Repo: https://github.com/kas1330/Weather-Dashboard
 
 Deployed: https://kas1330.github.io/Weather-Dashboard/
+
+<img src='dashboard.PNG' alt='Weather Dashboard'>
