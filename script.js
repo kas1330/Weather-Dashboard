@@ -43,6 +43,7 @@ $(document).ready(function(){
     })
     
     function getWeather(x){
+
         var longit = 0;
         var latit = 0;
 
@@ -143,7 +144,6 @@ $(document).ready(function(){
 
                     //Display humidity
                     var humidityFD = response.list[j].main.humidity;
-                    console.log('humidity: ', humidityFD );
                     var humidFD = '#future-humid' + i.toString();
                     $(humidFD).html('Humidity: ' + humidityFD + '%');
 
@@ -169,7 +169,16 @@ $(document).ready(function(){
         var newCity = {city: userInput.toUpperCase()};
         storedCities.push(newCity);
         localStorage.setItem('citiesList', JSON.stringify(storedCities));
-        console.log(localStorage);
+        // console.log(localStorage);
+
+        getWeather(userInput);
+
+        var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
+        // var cityStr = city.toString();
+        cityInput.attr('id', userInput);
+        var upperInput = userInput.toUpperCase();
+        cityInput.attr('value', upperInput);
+        $('#buttonList').append(cityInput);
 
         // var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
         // cityInput.attr('id', userInput);
