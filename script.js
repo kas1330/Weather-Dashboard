@@ -173,16 +173,21 @@ $(document).ready(function(){
 
         getWeather(userInput);
 
+        //Display most recent input button below the others
         var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
-        // var cityStr = city.toString();
         cityInput.attr('id', userInput);
         var upperInput = userInput.toUpperCase();
         cityInput.attr('value', upperInput);
         $('#buttonList').append(cityInput);
 
-
     })
 
+    $('#clear-btn').on('click', function (event){
+        event.preventDefault();
+        console.log('Clear button clicked');
+        localStorage.removeItem('citiesList');
+        $('#buttonList').empty();
 
+    })
 
 });
