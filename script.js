@@ -7,7 +7,28 @@
 
 $(document).ready(function(){
 
+    if(JSON.parse(localStorage.getItem('citiesList'))){
+        var l = JSON.parse(localStorage.getItem('citiesList'));
+        var listLength = l.length;
+        var i = 0;
+        l.forEach(city => {
+            console.log(city);
+            var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
+            // var cityStr = city.toString();
+            cityInput.attr('id', l[i].city);
+            cityInput.attr('value', l[i].city);
+            $('#buttonList').append(cityInput);
+            i++;
+        });
+    }
 
+    $(function(){
+        $('#buttonList').click(function(e){
+            console.log('Clicked a choice');
+            var clicked = e.target.id;
+            console.log('Clicked: ', clicked);
+        })
+    })
     
     $("#search-btn").on("click", function (event) {
         event.preventDefault();
@@ -16,20 +37,22 @@ $(document).ready(function(){
     
         // console.log('Button clicked');
         var apiKey = 'faa01ea92e85d4bc6a69d8f941aba85c';
-
         var userInput = $('#city-search').val();
         // console.log('City is: ', userInput);
 
-        var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
-        cityInput.attr('id', userInput);
-        cityInput.attr('value', userInput);
-        $('#buttonList').append(cityInput);
-        
+        //Store cities in local storage
+        var storedCities = JSON.parse(localStorage.getItem('citiesList')) || [];
+        var newCity = {city: userInput.toUpperCase()};
+        storedCities.push(newCity);
+        localStorage.setItem('citiesList', JSON.stringify(storedCities));
+        console.log(localStorage);
 
-        // var storedCities = JSON.parse(localStorage.getItem('citiesList')) || [];
-        // var newCity = {city: userInput.toUpperCase()};
-        // storedCities.push(newCity);
-        // localStorage.setItem('citiesList', JSON.stringify(storedCities));
+        // var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
+        // cityInput.attr('id', userInput);
+        // cityInput.attr('value', userInput);
+        // $('#buttonList').append(cityInput);
+
+
 
         queryURL = 'https://api.openweathermap.org/data/2.5/weather?q=' + userInput + '&appid=' + apiKey;
         $.ajax({
