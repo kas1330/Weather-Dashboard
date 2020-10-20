@@ -1,6 +1,4 @@
 
-//Add city to local storage (array of cities? think of the high scores for the JS quiz)
-//When you click on a city in search history show all the info again
 //When you open the app, show the last city you searched for
 
 
@@ -16,7 +14,6 @@ $(document).ready(function(){
         l.forEach(city => {
             console.log(city);
             var cityInput = $('<input type= "button" id= "" class= "mb-2 btn-primary btn-lg cityBtn" value=""/>');
-            // var cityStr = city.toString();
             cityInput.attr('id', l[i].city);
             cityInput.attr('value', l[i].city);
             $('#buttonList').append(cityInput);
@@ -24,12 +21,12 @@ $(document).ready(function(){
         });
     }
 
+    //Finds out which button has been clicked and calls the get weather function
     $(function(){
         $('#buttonList').click(function(e){
             console.log('Clicked a choice');
             var clicked = e.target.id;
-            console.log('Clicked: ', clicked);
-            
+            // console.log('Clicked: ', clicked);
             queryURL4 = 'https://api.openweathermap.org/data/2.5/weather?q=' + clicked + '&appid=' + apiKey;
             $.ajax({
                 url: queryURL4,
@@ -182,12 +179,12 @@ $(document).ready(function(){
 
     })
 
-    $('#clear-btn').on('click', function (event){
-        event.preventDefault();
-        console.log('Clear button clicked');
-        localStorage.removeItem('citiesList');
-        $('#buttonList').empty();
-
-    })
+    // //Clear local storage as well as the button div
+    // $('#clear-btn').on('click', function (event){
+    //     event.preventDefault();
+    //     console.log('Clear button clicked');
+    //     localStorage.removeItem('citiesList');
+    //     $('#buttonList').empty();
+    // })
 
 });
