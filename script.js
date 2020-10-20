@@ -1,8 +1,3 @@
-
-//When you open the app, show the last city you searched for
-
-
-
 $(document).ready(function(){
 
     var apiKey = 'faa01ea92e85d4bc6a69d8f941aba85c';
@@ -26,9 +21,8 @@ $(document).ready(function(){
     //Finds out which button has been clicked and calls the get weather function
     $(function(){
         $('#buttonList').click(function(e){
-            console.log('Clicked a choice');
+
             var clicked = e.target.id;
-            // console.log('Clicked: ', clicked);
             queryURL4 = 'https://api.openweathermap.org/data/2.5/weather?q=' + clicked + '&appid=' + apiKey;
             $.ajax({
                 url: queryURL4,
@@ -36,7 +30,6 @@ $(document).ready(function(){
             }).then(function (response) {
                 console.log(response);
                 getWeather(clicked);
-                
             })
         })
     })
@@ -51,7 +44,6 @@ $(document).ready(function(){
             url: queryURL,
             method: "GET"
         }).then(function (response) {
-            // console.log(response);
             
             longit = response.coord.lon;
             latit = response.coord.lat;
@@ -64,7 +56,7 @@ $(document).ready(function(){
 
             //Display weather icon
             var icon = response.weather[0].icon;
-            imgURL = 'http://openweathermap.org/img/wn/'+ icon + '.png';
+            imgURL = 'https://openweathermap.org/img/wn/'+ icon + '.png';
             $('#weather-icon').attr('src', imgURL);
 
             //Display temp
@@ -83,7 +75,7 @@ $(document).ready(function(){
 
 
             //Call for UV Index
-            var queryURL2 = 'http://api.openweathermap.org/data/2.5/uvi?lat=' + latit + '&lon=' + longit + '&appid=' + apiKey;
+            var queryURL2 = 'https://api.openweathermap.org/data/2.5/uvi?lat=' + latit + '&lon=' + longit + '&appid=' + apiKey;
             $.ajax({
                 url: queryURL2,
                 method: "GET"
@@ -95,7 +87,6 @@ $(document).ready(function(){
                 if(uvIndex >= 0 && uvIndex < 3){
                     $('#uv-ind').css("background-color", "green");
                     $('#uv-ind').css('color', 'white');
-
                 }
                 if(uvIndex >= 3 && uvIndex <= 6){
                     $('#uv-ind').css("background-color", "yellow");
@@ -113,7 +104,7 @@ $(document).ready(function(){
                 }
             })
 
-            var queryURL3= 'http://api.openweathermap.org/data/2.5/forecast?q=' + x + '&appid=' + apiKey;
+            var queryURL3= 'https://api.openweathermap.org/data/2.5/forecast?q=' + x + '&appid=' + apiKey;
             $.ajax({
                 url: queryURL3,
                 method: "GET"
@@ -132,7 +123,7 @@ $(document).ready(function(){
                     //Display the next 5 weather icons
                     var iconFD = response.list[j].weather[0].icon;
                     var weatherFD = '#weather-pic' + i.toString();
-                    imgURLFD = 'http://openweathermap.org/img/wn/'+ iconFD + '.png';
+                    imgURLFD = 'https://openweathermap.org/img/wn/'+ iconFD + '.png';
                     $(weatherFD).attr('src', imgURLFD);
                   
                     //Display the temp
@@ -155,20 +146,15 @@ $(document).ready(function(){
     }
     
     $("#search-btn").on("click", function (event) {
+        
         event.preventDefault();
-        // var longit = 0;
-        // var latit = 0;
-    
-        // console.log('Button clicked');
         var userInput = $('#city-search').val();
-        // console.log('City is: ', userInput);
 
         //Store cities in local storage
         var storedCities = JSON.parse(localStorage.getItem('citiesList')) || [];
         var newCity = {city: userInput.toUpperCase()};
         storedCities.push(newCity);
         localStorage.setItem('citiesList', JSON.stringify(storedCities));
-        // console.log(localStorage);
 
         getWeather(userInput);
 
@@ -181,6 +167,7 @@ $(document).ready(function(){
 
     })
 
+    //Realized I didn't need this, just assumed there was a clear button
     // //Clear local storage as well as the button div
     // $('#clear-btn').on('click', function (event){
     //     event.preventDefault();
