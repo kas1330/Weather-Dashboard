@@ -167,13 +167,13 @@ $(document).ready(function(){
 
     })
 
-    //Realized I didn't need this, just assumed there was a clear button
-    // //Clear local storage as well as the button div
-    // $('#clear-btn').on('click', function (event){
-    //     event.preventDefault();
-    //     console.log('Clear button clicked');
-    //     localStorage.removeItem('citiesList');
-    //     $('#buttonList').empty();
-    // })
+    
+    //Clear local storage as well as the button div
+    $('#clear-btn').on('click', function (event){
+        event.preventDefault();
+        console.log('Clear button clicked');
+        localStorage.removeItem('citiesList');
+        $('#buttonList').empty();
+    })
 
 });
