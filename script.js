@@ -116,9 +116,50 @@ $(document).ready(function(){
                 for(var i = 0; i<5; i++){
                     
                     //Display the next 5 dates
-                    var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
                     var dateW = '#date-week' + i.toString();
-                    $(dateW).html(dateFD);
+                    var month = (today.getMonth()+1);
+                    var dateDay = (today.getDate()+1);
+                    //Check to see if any of the next five days go into the next month
+                    //Months with 30 days
+                    if(month === 4 || month === 6 || month === 9 || month === 11){
+                        var d = dateDay + i;
+                        if(d > 30){
+                            var correctDay = d - 30;
+                            var dateFD = (today.getMonth()+2) + '/' + (correctDay) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                        else{
+                            var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                    }
+                    //Months with 31 days
+                    if(month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 7 || month === 10 || month === 12){
+                        var d = dateDay + i;
+                        if(d > 31){
+                            var correctDay = d - 31;
+                            var dateFD = (today.getMonth()+2) + '/' + (correctDay) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                        else{
+                            var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                    }
+                    //February
+                    if(month === 2){
+                        var d = dateDay + i;
+                        if(d > 28){
+                            var correctDay = d - 28;
+                            var dateFD = (today.getMonth()+2) + '/' + (correctDay) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                        else{
+                            var dateFD = (today.getMonth()+1) + '/' + (today.getDate()+i+1) + '/' + today.getFullYear();
+                            $(dateW).html(dateFD);
+                        }
+                    }
+
 
                     //Display the next 5 weather icons
                     var iconFD = response.list[j].weather[0].icon;
